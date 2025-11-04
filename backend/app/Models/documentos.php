@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class expediente_documentos extends Model
+class documentos extends Model
 {
     //
 }

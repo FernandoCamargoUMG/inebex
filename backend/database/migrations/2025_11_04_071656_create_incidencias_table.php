@@ -11,8 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('incidencias', function (Blueprint $table) {
+        Schema::create('incidents', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('reported_by_user_id')->constrained('users');
+            $table->string('type', 50);
+            $table->text('description');
+            $table->enum('status', ['pending', 'resolved'])->default('pending');
             $table->timestamps();
         });
     }
@@ -22,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('incidencias');
+        Schema::dropIfExists('incidents');
     }
 };

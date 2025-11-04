@@ -11,8 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tipos_documentos', function (Blueprint $table) {
+        Schema::create('document_types', function (Blueprint $table) {
             $table->id();
+            $table->string('name', 100);
+            $table->boolean('active')->default(true);
             $table->timestamps();
         });
     }
@@ -22,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tipos_documentos');
+        Schema::dropIfExists('document_types');
     }
 };

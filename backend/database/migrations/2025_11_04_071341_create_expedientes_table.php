@@ -11,8 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('expedientes', function (Blueprint $table) {
+        Schema::create('records', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained('users');
+            $table->unsignedBigInteger('profile_id');
+            $table->enum('status', ['created','under_review','approved','rejected'])->default('created');
+            $table->text('observations')->nullable();
             $table->timestamps();
         });
     }
@@ -22,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('expedientes');
+        Schema::dropIfExists('records');
     }
 };

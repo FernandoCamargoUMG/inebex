@@ -11,9 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('actividades_logs', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::table('records', function (Blueprint $table) {
+            $table->foreign('profile_id')->references('id')->on('profiles');
         });
     }
 
@@ -22,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('actividades_logs');
+        Schema::table('records', function (Blueprint $table) {
+            $table->dropForeign(['profile_id']);
+        });
     }
 };

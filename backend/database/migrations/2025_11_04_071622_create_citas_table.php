@@ -11,8 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('citas', function (Blueprint $table) {
+        Schema::create('appointments', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained('users')->onCascadeOndelete();
+            $table->foreignId('appointment_type_id')->constrained('appointment_types');
+            $table->string('title')->nullable();
+            $table->dateTime('begin');
+            $table->dateTime('end');
+            $table->enum('status', ['pending', 'completed', 'canceled', 'confirmed'])->default('pending');
+            $table->text('observations')->nullable();
             $table->timestamps();
         });
     }
@@ -22,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('citas');
+        Schema::dropIfExists('appointments');
     }
 };

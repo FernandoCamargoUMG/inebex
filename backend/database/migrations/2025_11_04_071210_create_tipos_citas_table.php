@@ -11,8 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tipos_citas', function (Blueprint $table) {
+        Schema::create('appointment_types', function (Blueprint $table) {
             $table->id();
+            $table->string('name', 100);
+            $table->integer('duration_minutes')->default(30);
+            $table->boolean('active')->default(true);
             $table->timestamps();
         });
     }
@@ -22,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tipos_citas');
+        Schema::dropIfExists('appointment_types');
     }
 };

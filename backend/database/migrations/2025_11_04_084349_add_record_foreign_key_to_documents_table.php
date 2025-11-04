@@ -11,9 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('expediente_documentos', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::table('documents', function (Blueprint $table) {
+            $table->foreign('record_id')->references('id')->on('records')->cascadeOnDelete();
         });
     }
 
@@ -22,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('expediente_documentos');
+        Schema::table('documents', function (Blueprint $table) {
+            $table->dropForeign(['record_id']);
+        });
     }
 };

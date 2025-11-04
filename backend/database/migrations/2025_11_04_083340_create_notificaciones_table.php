@@ -11,8 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('archivo_documentos', function (Blueprint $table) {
+        Schema::create('notifications', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained('users');
+            $table->string('title', 100);
+            $table->text('message');
+            $table->boolean('read')->default(false);
+            $table->timestamp('sent_at')->useCurrent();
             $table->timestamps();
         });
     }
@@ -22,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('archivo_documentos');
+        Schema::dropIfExists('notifications');
     }
 };
