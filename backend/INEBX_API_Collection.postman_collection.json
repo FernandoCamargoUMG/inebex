@@ -1,0 +1,1002 @@
+{
+	"info": {
+		"_postman_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+		"name": "INEBEX API Collection",
+		"description": "Colección completa de APIs para el sistema INEBX - Sistema de gestión administrativa con 59 endpoints",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12345678"
+	},
+	"item": [
+		{
+			"name": "👥 Usuarios",
+			"item": [
+				{
+					"name": "Listar Usuarios",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/usuarios",
+							"host": ["{{base_url}}"],
+							"path": ["api", "usuarios"]
+						}
+					}
+				},
+				{
+					"name": "Crear Usuario",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"first_name\": \"Juan\",\n  \"last_name\": \"Pérez\",\n  \"email\": \"juan@ejemplo.com\",\n  \"password\": \"password123\",\n  \"phone\": \"+502 1111-2222\",\n  \"address\": \"Guatemala City, Guatemala\",\n  \"role_id\": 5,\n  \"status\": \"active\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/usuarios",
+							"host": ["{{base_url}}"],
+							"path": ["api", "usuarios"]
+						}
+					}
+				},
+				{
+					"name": "Ver Usuario",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/usuarios/1",
+							"host": ["{{base_url}}"],
+							"path": ["api", "usuarios", "1"]
+						}
+					}
+				},
+				{
+					"name": "Actualizar Usuario",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"first_name\": \"Juan Carlos\",\n  \"phone\": \"+502 1111-3333\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/usuarios/1",
+							"host": ["{{base_url}}"],
+							"path": ["api", "usuarios", "1"]
+						}
+					}
+				},
+				{
+					"name": "Eliminar Usuario",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/usuarios/1",
+							"host": ["{{base_url}}"],
+							"path": ["api", "usuarios", "1"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "🛡️ Roles",
+			"item": [
+				{
+					"name": "Listar Roles",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/roles",
+							"host": ["{{base_url}}"],
+							"path": ["api", "roles"]
+						}
+					}
+				},
+				{
+					"name": "Crear Rol",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Nuevo Rol\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/roles",
+							"host": ["{{base_url}}"],
+							"path": ["api", "roles"]
+						}
+					}
+				},
+				{
+					"name": "Ver Rol",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/roles/1",
+							"host": ["{{base_url}}"],
+							"path": ["api", "roles", "1"]
+						}
+					}
+				},
+				{
+					"name": "Actualizar Rol",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Rol Actualizado\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/roles/1",
+							"host": ["{{base_url}}"],
+							"path": ["api", "roles", "1"]
+						}
+					}
+				},
+				{
+					"name": "Eliminar Rol",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/roles/1",
+							"host": ["{{base_url}}"],
+							"path": ["api", "roles", "1"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "👤 Perfiles",
+			"item": [
+				{
+					"name": "Listar Perfiles",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/perfiles",
+							"host": ["{{base_url}}"],
+							"path": ["api", "perfiles"]
+						}
+					}
+				},
+				{
+					"name": "Crear Perfil",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Nuevo Perfil\",\n  \"description\": \"Descripción del perfil\",\n  \"requirements\": \"Requisitos necesarios\",\n  \"is_active\": true\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/perfiles",
+							"host": ["{{base_url}}"],
+							"path": ["api", "perfiles"]
+						}
+					}
+				},
+				{
+					"name": "Ver Perfil",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/perfiles/1",
+							"host": ["{{base_url}}"],
+							"path": ["api", "perfiles", "1"]
+						}
+					}
+				},
+				{
+					"name": "Actualizar Perfil",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Perfil Actualizado\",\n  \"description\": \"Nueva descripción\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/perfiles/1",
+							"host": ["{{base_url}}"],
+							"path": ["api", "perfiles", "1"]
+						}
+					}
+				},
+				{
+					"name": "Eliminar Perfil",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/perfiles/1",
+							"host": ["{{base_url}}"],
+							"path": ["api", "perfiles", "1"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "📋 Expedientes",
+			"item": [
+				{
+					"name": "Listar Expedientes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/expedientes",
+							"host": ["{{base_url}}"],
+							"path": ["api", "expedientes"]
+						}
+					}
+				},
+				{
+					"name": "Crear Expediente",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"record_number\": \"EXP-2025-010\",\n  \"user_id\": 6,\n  \"profile_id\": 1,\n  \"status\": \"created\",\n  \"observations\": \"Nuevo expediente creado\",\n  \"notes\": \"Notas adicionales\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/expedientes",
+							"host": ["{{base_url}}"],
+							"path": ["api", "expedientes"]
+						}
+					}
+				},
+				{
+					"name": "Ver Expediente",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/expedientes/1",
+							"host": ["{{base_url}}"],
+							"path": ["api", "expedientes", "1"]
+						}
+					}
+				},
+				{
+					"name": "Expedientes por Estado",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/expedientes/estado/active",
+							"host": ["{{base_url}}"],
+							"path": ["api", "expedientes", "estado", "active"]
+						}
+					}
+				},
+				{
+					"name": "Actualizar Expediente",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"status\": \"under_review\",\n  \"observations\": \"Expediente en revisión\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/expedientes/1",
+							"host": ["{{base_url}}"],
+							"path": ["api", "expedientes", "1"]
+						}
+					}
+				},
+				{
+					"name": "Eliminar Expediente",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/expedientes/1",
+							"host": ["{{base_url}}"],
+							"path": ["api", "expedientes", "1"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "📅 Citas",
+			"item": [
+				{
+					"name": "Listar Citas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/citas",
+							"host": ["{{base_url}}"],
+							"path": ["api", "citas"]
+						}
+					}
+				},
+				{
+					"name": "Citas de Hoy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/citas/hoy",
+							"host": ["{{base_url}}"],
+							"path": ["api", "citas", "hoy"]
+						}
+					}
+				},
+				{
+					"name": "Crear Cita",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"user_id\": 6,\n  \"appointment_type_id\": 1,\n  \"title\": \"Consulta Inicial\",\n  \"begin\": \"2025-11-05 10:00:00\",\n  \"end\": \"2025-11-05 11:00:00\",\n  \"status\": \"pending\",\n  \"observations\": \"Primera cita del cliente\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/citas",
+							"host": ["{{base_url}}"],
+							"path": ["api", "citas"]
+						}
+					}
+				},
+				{
+					"name": "Ver Cita",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/citas/1",
+							"host": ["{{base_url}}"],
+							"path": ["api", "citas", "1"]
+						}
+					}
+				},
+				{
+					"name": "Actualizar Cita",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"status\": \"confirmed\",\n  \"observations\": \"Cita confirmada por el cliente\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/citas/1",
+							"host": ["{{base_url}}"],
+							"path": ["api", "citas", "1"]
+						}
+					}
+				},
+				{
+					"name": "Eliminar Cita",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/citas/1",
+							"host": ["{{base_url}}"],
+							"path": ["api", "citas", "1"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "📄 Documentos",
+			"item": [
+				{
+					"name": "Listar Documentos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/documentos",
+							"host": ["{{base_url}}"],
+							"path": ["api", "documentos"]
+						}
+					}
+				},
+				{
+					"name": "Subir Documento",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "record_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "document_type_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "title",
+									"value": "Cédula de Identidad",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Documento de identificación personal",
+									"type": "text"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"src": []
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/api/documentos",
+							"host": ["{{base_url}}"],
+							"path": ["api", "documentos"]
+						}
+					}
+				},
+				{
+					"name": "Ver Documento",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/documentos/1",
+							"host": ["{{base_url}}"],
+							"path": ["api", "documentos", "1"]
+						}
+					}
+				},
+				{
+					"name": "Documentos por Expediente",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/documentos/expediente/1",
+							"host": ["{{base_url}}"],
+							"path": ["api", "documentos", "expediente", "1"]
+						}
+					}
+				},
+				{
+					"name": "Descargar Documento",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/documentos/1/descargar",
+							"host": ["{{base_url}}"],
+							"path": ["api", "documentos", "1", "descargar"]
+						}
+					}
+				},
+				{
+					"name": "Actualizar Documento",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"Cédula Actualizada\",\n  \"description\": \"Documento de identificación actualizado\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/documentos/1",
+							"host": ["{{base_url}}"],
+							"path": ["api", "documentos", "1"]
+						}
+					}
+				},
+				{
+					"name": "Eliminar Documento",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/documentos/1",
+							"host": ["{{base_url}}"],
+							"path": ["api", "documentos", "1"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "🔧 Tipos de Cita",
+			"item": [
+				{
+					"name": "Listar Tipos de Cita",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/tipos-citas",
+							"host": ["{{base_url}}"],
+							"path": ["api", "tipos-citas"]
+						}
+					}
+				},
+				{
+					"name": "Crear Tipo de Cita",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Consulta Especializada\",\n  \"description\": \"Consulta especializada para casos complejos\",\n  \"duration_minutes\": 90,\n  \"is_active\": true\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/tipos-citas",
+							"host": ["{{base_url}}"],
+							"path": ["api", "tipos-citas"]
+						}
+					}
+				},
+				{
+					"name": "Ver Tipo de Cita",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/tipos-citas/1",
+							"host": ["{{base_url}}"],
+							"path": ["api", "tipos-citas", "1"]
+						}
+					}
+				},
+				{
+					"name": "Actualizar Tipo de Cita",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"duration_minutes\": 120,\n  \"description\": \"Duración extendida para casos complejos\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/tipos-citas/1",
+							"host": ["{{base_url}}"],
+							"path": ["api", "tipos-citas", "1"]
+						}
+					}
+				},
+				{
+					"name": "Eliminar Tipo de Cita",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/tipos-citas/1",
+							"host": ["{{base_url}}"],
+							"path": ["api", "tipos-citas", "1"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "📋 Tipos de Documento",
+			"item": [
+				{
+					"name": "Listar Tipos de Documento",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/tipos-documentos",
+							"host": ["{{base_url}}"],
+							"path": ["api", "tipos-documentos"]
+						}
+					}
+				},
+				{
+					"name": "Crear Tipo de Documento",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Licencia de Conducir\",\n  \"description\": \"Documento de autorización para conducir\",\n  \"is_required\": false,\n  \"is_active\": true\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/tipos-documentos",
+							"host": ["{{base_url}}"],
+							"path": ["api", "tipos-documentos"]
+						}
+					}
+				},
+				{
+					"name": "Ver Tipo de Documento",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/tipos-documentos/1",
+							"host": ["{{base_url}}"],
+							"path": ["api", "tipos-documentos", "1"]
+						}
+					}
+				},
+				{
+					"name": "Actualizar Tipo de Documento",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"description\": \"Documento actualizado\",\n  \"is_required\": true\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/tipos-documentos/1",
+							"host": ["{{base_url}}"],
+							"path": ["api", "tipos-documentos", "1"]
+						}
+					}
+				},
+				{
+					"name": "Eliminar Tipo de Documento",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/tipos-documentos/1",
+							"host": ["{{base_url}}"],
+							"path": ["api", "tipos-documentos", "1"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "🚨 Incidencias",
+			"item": [
+				{
+					"name": "Listar Incidencias",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/incidencias",
+							"host": ["{{base_url}}"],
+							"path": ["api", "incidencias"]
+						}
+					}
+				},
+				{
+					"name": "Incidencias por Prioridad",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/incidencias/prioridad/high",
+							"host": ["{{base_url}}"],
+							"path": ["api", "incidencias", "prioridad", "high"]
+						}
+					}
+				},
+				{
+					"name": "Incidencias Vencidas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/incidencias/vencidas",
+							"host": ["{{base_url}}"],
+							"path": ["api", "incidencias", "vencidas"]
+						}
+					}
+				},
+				{
+					"name": "Crear Incidencia",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"user_id\": 6,\n  \"assigned_user_id\": 4,\n  \"title\": \"Problema con el sistema\",\n  \"description\": \"El sistema no responde correctamente\",\n  \"priority\": \"medium\",\n  \"status\": \"open\",\n  \"due_date\": \"2025-11-07 17:00:00\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/incidencias",
+							"host": ["{{base_url}}"],
+							"path": ["api", "incidencias"]
+						}
+					}
+				},
+				{
+					"name": "Ver Incidencia",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/incidencias/1",
+							"host": ["{{base_url}}"],
+							"path": ["api", "incidencias", "1"]
+						}
+					}
+				},
+				{
+					"name": "Actualizar Incidencia",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"status\": \"resolved\",\n  \"resolution\": \"Problema resuelto reiniciando el servidor\",\n  \"resolved_at\": \"2025-11-04 15:30:00\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/incidencias/1",
+							"host": ["{{base_url}}"],
+							"path": ["api", "incidencias", "1"]
+						}
+					}
+				},
+				{
+					"name": "Eliminar Incidencia",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/incidencias/1",
+							"host": ["{{base_url}}"],
+							"path": ["api", "incidencias", "1"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "🔔 Notificaciones",
+			"item": [
+				{
+					"name": "Listar Notificaciones",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/notificaciones",
+							"host": ["{{base_url}}"],
+							"path": ["api", "notificaciones"]
+						}
+					}
+				},
+				{
+					"name": "Contar No Leídas por Usuario",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/notificaciones/usuario/6/no-leidas",
+							"host": ["{{base_url}}"],
+							"path": ["api", "notificaciones", "usuario", "6", "no-leidas"]
+						}
+					}
+				},
+				{
+					"name": "Crear Notificación",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"user_id\": 6,\n  \"title\": \"Nueva Notificación\",\n  \"message\": \"Tienes una nueva notificación en el sistema\",\n  \"type\": \"info\",\n  \"is_read\": false\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/notificaciones",
+							"host": ["{{base_url}}"],
+							"path": ["api", "notificaciones"]
+						}
+					}
+				},
+				{
+					"name": "Ver Notificación",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/notificaciones/1",
+							"host": ["{{base_url}}"],
+							"path": ["api", "notificaciones", "1"]
+						}
+					}
+				},
+				{
+					"name": "Marcar como Leída",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/notificaciones/1/leer",
+							"host": ["{{base_url}}"],
+							"path": ["api", "notificaciones", "1", "leer"]
+						}
+					}
+				},
+				{
+					"name": "Marcar Todas como Leídas",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"user_id\": 6\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/notificaciones/marcar-todas-leidas",
+							"host": ["{{base_url}}"],
+							"path": ["api", "notificaciones", "marcar-todas-leidas"]
+						}
+					}
+				},
+				{
+					"name": "Eliminar Notificación",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/notificaciones/1",
+							"host": ["{{base_url}}"],
+							"path": ["api", "notificaciones", "1"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "🧪 Pruebas",
+			"item": [
+				{
+					"name": "Test API",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/test",
+							"host": ["{{base_url}}"],
+							"path": ["api", "test"]
+						}
+					}
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://127.0.0.1:8000",
+			"type": "string"
+		}
+	]
+}

@@ -15,11 +15,12 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('record_id');
             $table->foreignId('document_type_id')->constrained('document_types');
-            $table->string('original_name');
-            $table->string('path');
-            $table->unsignedBigInteger('size_bytes')->nullable();
-            $table->enum('format', ['pdf'])->default('pdf');
-            $table->foreignId('uploaded_by_user_id')->constrained('users');
+            $table->string('title', 255);
+            $table->text('description')->nullable();
+            $table->string('file_name', 255);
+            $table->string('file_path', 500);
+            $table->unsignedBigInteger('file_size')->nullable();
+            $table->string('mime_type', 100)->nullable();
             $table->timestamps();
         });
     }

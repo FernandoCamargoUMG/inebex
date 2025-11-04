@@ -13,10 +13,15 @@ return new class extends Migration
     {
         Schema::create('incidents', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('reported_by_user_id')->constrained('users');
-            $table->string('type', 50);
+            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('assigned_user_id')->nullable()->constrained('users');
+            $table->string('title', 255);
             $table->text('description');
-            $table->enum('status', ['pending', 'resolved'])->default('pending');
+            $table->enum('priority', ['low', 'medium', 'high', 'critical'])->default('medium');
+            $table->enum('status', ['open', 'in_progress', 'resolved', 'closed'])->default('open');
+            $table->datetime('due_date')->nullable();
+            $table->datetime('resolved_at')->nullable();
+            $table->text('resolution')->nullable();
             $table->timestamps();
         });
     }

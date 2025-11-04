@@ -16,7 +16,8 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users');
             $table->string('title', 100);
             $table->text('message');
-            $table->boolean('read')->default(false);
+            $table->enum('type', ['info', 'warning', 'success', 'error', 'reminder'])->default('info');
+            $table->boolean('is_read')->default(false);
             $table->timestamp('sent_at')->useCurrent();
             $table->timestamps();
         });

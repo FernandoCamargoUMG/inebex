@@ -1,0 +1,16 @@
+Documento de prueba para el sistema INEBEX
+
+Este es un archivo de prueba para verificar que la funcionalidad de subida de documentos funciona correctamente.
+
+Sistema: INEBEX
+Fecha: 4 de noviembre de 2025
+Usuario: Fernando Camargo
+
+El sistema permite:
+- Subir archivos PDF hasta 10MB
+- Almacenar metadata del documento
+- Descargar documentos
+- Organizar por expedientes
+- Validar tipos de documento
+
+¡La funcionalidad está lista para usar!

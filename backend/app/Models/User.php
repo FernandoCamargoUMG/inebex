@@ -18,9 +18,14 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-        'name',
+        'first_name',
+        'last_name',
         'email',
         'password',
+        'phone',
+        'address',
+        'status',
+        'role_id',
     ];
 
     /**
@@ -42,7 +47,54 @@ class User extends Authenticatable
     {
         return [
             'email_verified_at' => 'datetime',
-            'password' => 'hashed',
         ];
+    }
+
+    /**
+     * Get the role that owns the user.
+     */
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
+
+    /**
+     * Get the appointments for the user.
+     */
+    public function appointments()
+    {
+        return $this->hasMany(Appointment::class);
+    }
+
+    /**
+     * Get the records for the user.
+     */
+    public function records()
+    {
+        return $this->hasMany(Record::class);
+    }
+
+    /**
+     * Get the incidents for the user.
+     */
+    public function incidents()
+    {
+        return $this->hasMany(Incident::class);
+    }
+
+    /**
+     * Get the documents for the user.
+     */
+    public function documents()
+    {
+        return $this->hasMany(Document::class);
+    }
+
+    /**
+     * Get the notifications for the user.
+     */
+    public function notifications()
+    {
+        return $this->hasMany(Notification::class);
     }
 }

@@ -13,10 +13,12 @@ return new class extends Migration
     {
         Schema::create('records', function (Blueprint $table) {
             $table->id();
+            $table->string('record_number', 50)->unique();
             $table->foreignId('user_id')->constrained('users');
             $table->unsignedBigInteger('profile_id');
-            $table->enum('status', ['created','under_review','approved','rejected'])->default('created');
+            $table->enum('status', ['created','under_review','approved','rejected','active','completed'])->default('created');
             $table->text('observations')->nullable();
+            $table->text('notes')->nullable();
             $table->timestamps();
         });
     }

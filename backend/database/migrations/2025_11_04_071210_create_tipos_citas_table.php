@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('appointment_types', function (Blueprint $table) {
             $table->id();
             $table->string('name', 100);
+            $table->text('description')->nullable();
             $table->integer('duration_minutes')->default(30);
-            $table->boolean('active')->default(true);
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
     }

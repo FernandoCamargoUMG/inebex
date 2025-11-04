@@ -14,7 +14,9 @@ return new class extends Migration
         Schema::create('document_types', function (Blueprint $table) {
             $table->id();
             $table->string('name', 100);
-            $table->boolean('active')->default(true);
+            $table->text('description')->nullable();
+            $table->boolean('is_required')->default(false);
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
     }
