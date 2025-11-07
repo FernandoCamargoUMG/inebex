@@ -5,7 +5,7 @@
 1. **Abre Postman**
 2. **Importa la colección**:
    - Haz clic en "Import" 
-   - Selecciona el archivo `INEBX_API_Collection.postman_collection.json`
+   - Selecciona el archivo `INEBEX_API_Collection.postman_collection.json`
    - La colección aparecerá con todos los endpoints organizados
 
 ## 🌐 Variables de Entorno
@@ -167,4 +167,4 @@ La colección está organizada con emojis para fácil navegación:
 - 🔔 Notificaciones
 - 🧪 Pruebas
 
-¡Ya tienes todo listo para probar tu API de INEBX! 🚀
+¡Ya tienes todo listo para probar tu API de INEBEX! 🚀

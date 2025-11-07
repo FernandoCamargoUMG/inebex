@@ -1,8 +1,8 @@
-# 🔗 Guía de Integración Multi-API INEBX
+# 🔗 Guía de Integración Multi-API INEBEX
 
 ## 🎯 Objetivo
 Integrar 3 sistemas independientes:
-- **INEBX API** (MySQL) - Sistema administrativo
+- **INEBEX API** (MySQL) - Sistema administrativo
 - **Inventarios API** (PostgreSQL/MySQL) - Gestión de inventarios
 - **Contable API** (SQL Server/MySQL) - Sistema contable
 
@@ -22,7 +22,7 @@ Integrar 3 sistemas independientes:
 Frontend (React/Vue/Angular)
        ↓
 Laravel API Gateway
-       ├── INEBX Module (MySQL)
+       ├── INEBEX Module (MySQL)
        ├── HTTP Client → Inventarios API (PostgreSQL)
        └── HTTP Client → Contable API (SQL Server)
 ```
@@ -32,10 +32,10 @@ Laravel API Gateway
 ```php
 // config/database.php - Múltiples conexiones
 'connections' => [
-    'mysql_inebx' => [
+    'mysql_inebex' => [
         'driver' => 'mysql',
-        'host' => env('DB_INEBX_HOST', '127.0.0.1'),
-        'database' => env('DB_INEBX_DATABASE', 'inebx'),
+        'host' => env('DB_INEBEX_HOST', '127.0.0.1'),
+        'database' => env('DB_INEBEX_DATABASE', 'inebex'),
         // ... resto de configuración
     ],
     'pgsql_inventory' => [
@@ -66,7 +66,7 @@ class IntegrationService
     {
         DB::beginTransaction();
         try {
-            // 1. Crear expediente en INEBX
+            // 1. Crear expediente en INEBEX
             $record = Record::create($data['record']);
             
             // 2. Crear productos en Inventarios
@@ -230,13 +230,13 @@ public function store(Request $request)
 
 ### .env Configuration:
 ```env
-# INEBX Database
-DB_INEBX_CONNECTION=mysql
-DB_INEBX_HOST=127.0.0.1
-DB_INEBX_PORT=3306
-DB_INEBX_DATABASE=inebx
-DB_INEBX_USERNAME=root
-DB_INEBX_PASSWORD=
+# INEBEX Database
+DB_INEBEX_CONNECTION=mysql
+DB_INEBEX_HOST=127.0.0.1
+DB_INEBEX_PORT=3306
+DB_INEBEX_DATABASE=inebex
+DB_INEBEX_USERNAME=root
+DB_INEBEX_PASSWORD=
 
 # Inventory Database  
 DB_INVENTORY_CONNECTION=pgsql
@@ -330,11 +330,11 @@ class SyncSystems extends Command
 
 ### Para tu caso específico:
 
-1. **🌟 Mantén INEBX como API principal** (ya está desarrollado)
+1. **🌟 Mantén INEBEX como API principal** (ya está desarrollado)
 2. **🔌 Agrega servicios de integración** para inventarios y contabilidad
 3. **🗄️ Usa múltiples conexiones de DB** en Laravel
 4. **🔄 Implementa eventos** para sincronización automática
-5. **🛡️ Centraliza la autenticación** en INEBX
+5. **🛡️ Centraliza la autenticación** en INEBEX
 6. **📝 Mantén logs detallados** de todas las integraciones
 
 ### Beneficios:
