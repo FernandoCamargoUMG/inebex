@@ -1,4 +1,4 @@
-# API para Sistema Integral de Gestión Académica y Administrativa
+# Sistema Integral de Gestión Académica y Administrativa
 
 ## 📘 Descripción General
 
