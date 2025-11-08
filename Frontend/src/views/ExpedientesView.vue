@@ -40,9 +40,7 @@
                   <el-option label="Aprobado" value="approved" />
                   <el-option label="Rechazado" value="rejected" />
                   <el-option label="Activo" value="active" />
-                  <el-option label="Inactivo" value="inactive" />
                   <el-option label="Completado" value="completed" />
-                  <el-option label="Cancelado" value="cancelled" />
                 </el-select>
               </el-col>
               <el-col :span="6">
@@ -163,93 +161,108 @@
             </template>
           </el-table-column>
 
-          <el-table-column label="Acciones" width="320" fixed="right">
+          <el-table-column label="Acciones" width="150" fixed="right">
             <template #default="{ row }">
               <div class="action-buttons">
-                <!-- Botones básicos siempre visibles -->
-                <el-tooltip content="Ver detalles" placement="top">
-                  <el-button 
-                    type="primary" 
-                    :icon="View"
-                    @click="viewExpediente(row)"
-                    size="small"
-                    plain
-                    circle />
-                </el-tooltip>
-                
-                <el-tooltip content="Editar datos" placement="top">
-                  <el-button 
-                    type="warning" 
-                    :icon="Edit"
-                    @click="openEditDialog(row)"
-                    size="small"
-                    plain
-                    circle />
-                </el-tooltip>
-
-                <!-- Botones de cambio de estado según estado actual -->
-                <template v-if="row.status === 'created'">
-                  <el-tooltip content="Pasar a revisión" placement="top">
+                <!-- Fila superior: Botones básicos -->
+                <div class="basic-actions">
+                  <el-tooltip content="Ver detalles" placement="top">
                     <el-button 
-                      type="info" 
-                      @click="changeStatus(row, 'under_review')"
-                      size="small">
-                      Revisar
-                    </el-button>
+                      type="primary" 
+                      :icon="View"
+                      @click="viewExpediente(row)"
+                      size="small"
+                      plain />
                   </el-tooltip>
-                </template>
-
-                <template v-else-if="row.status === 'under_review'">
-                  <el-tooltip content="Aprobar expediente" placement="top">
-                    <el-button 
-                      type="success" 
-                      @click="changeStatus(row, 'approved')"
-                      size="small">
-                      Aprobar
-                    </el-button>
-                  </el-tooltip>
-                  <el-tooltip content="Rechazar expediente" placement="top">
-                    <el-button 
-                      type="danger" 
-                      @click="changeStatus(row, 'rejected')"
-                      size="small">
-                      Rechazar
-                    </el-button>
-                  </el-tooltip>
-                </template>
-
-                <template v-else-if="row.status === 'approved'">
-                  <el-tooltip content="Marcar como completado" placement="top">
-                    <el-button 
-                      type="success" 
-                      @click="changeStatus(row, 'completed')"
-                      size="small">
-                      Completar
-                    </el-button>
-                  </el-tooltip>
-                </template>
-
-                <template v-else-if="row.status === 'rejected'">
-                  <el-tooltip content="Reabrir para revisión" placement="top">
+                  
+                  <el-tooltip content="Editar datos" placement="top">
                     <el-button 
                       type="warning" 
-                      @click="changeStatus(row, 'under_review')"
-                      size="small">
-                      Reabrir
-                    </el-button>
+                      :icon="Edit"
+                      @click="openEditDialog(row)"
+                      size="small"
+                      plain />
                   </el-tooltip>
-                </template>
 
-                <!-- Botón eliminar siempre disponible -->
-                <el-tooltip content="Eliminar expediente" placement="top">
-                  <el-button 
-                    type="danger" 
-                    :icon="Delete"
-                    @click="confirmDelete(row)"
-                    size="small"
-                    plain
-                    circle />
-                </el-tooltip>
+                  <el-tooltip content="Eliminar" placement="top">
+                    <el-button 
+                      type="danger" 
+                      :icon="Delete"
+                      @click="confirmDelete(row)"
+                      size="small"
+                      plain />
+                  </el-tooltip>
+                </div>
+
+                <!-- Fila inferior: Botones de cambio de estado -->
+                <div class="status-actions">
+                  <template v-if="row.status === 'created'">
+                    <el-tooltip content="Pasar a revisión" placement="top">
+                      <el-button 
+                        type="info" 
+                        @click="changeStatus(row, 'under_review')"
+                        size="small">
+                        Revisar
+                      </el-button>
+                    </el-tooltip>
+                  </template>
+
+                  <template v-else-if="row.status === 'under_review'">
+                    <el-tooltip content="Aprobar expediente" placement="top">
+                      <el-button 
+                        type="success" 
+                        @click="changeStatus(row, 'approved')"
+                        size="small">
+                        Aprobar
+                      </el-button>
+                    </el-tooltip>
+                    <el-tooltip content="Rechazar expediente" placement="top">
+                      <el-button 
+                        type="danger" 
+                        @click="changeStatus(row, 'rejected')"
+                        size="small">
+                        Rechazar
+                      </el-button>
+                    </el-tooltip>
+                  </template>
+
+                  <template v-else-if="row.status === 'approved'">
+                    <el-tooltip content="Activar expediente" placement="top">
+                      <el-button 
+                        type="success" 
+                        @click="changeStatus(row, 'active')"
+                        size="small">
+                        Activar
+                      </el-button>
+                    </el-tooltip>
+                  </template>
+
+                  <template v-else-if="row.status === 'active'">
+                    <el-tooltip content="Marcar como completado" placement="top">
+                      <el-button 
+                        type="primary" 
+                        @click="changeStatus(row, 'completed')"
+                        size="small">
+                        Completar
+                      </el-button>
+                    </el-tooltip>
+                  </template>
+
+                  <template v-else-if="row.status === 'rejected'">
+                    <el-tooltip content="Reabrir para revisión" placement="top">
+                      <el-button 
+                        type="warning" 
+                        @click="changeStatus(row, 'under_review')"
+                        size="small">
+                        Reabrir
+                      </el-button>
+                    </el-tooltip>
+                  </template>
+
+                  <template v-else>
+                    <span class="status-final">Finalizado</span>
+                  </template>
+                </div>
               </div>
             </template>
           </el-table-column>
@@ -398,17 +411,62 @@
           </el-col>
           <el-col :span="12">
             <div class="documents-section">
-              <h4>Documentos ({{ selectedExpediente.documents?.length || 0 }})</h4>
-              <el-empty v-if="!selectedExpediente.documents?.length" 
-                description="No hay documentos subidos" />
+              <div class="documents-header">
+                <h4>Documentos ({{ expedienteDocuments.length }})</h4>
+                <el-button 
+                  type="primary" 
+                  size="small"
+                  :icon="Plus"
+                  @click="openUploadDialog"
+                  class="upload-btn">
+                  Subir PDF
+                </el-button>
+              </div>
+              
+              <el-empty v-if="!expedienteDocuments.length" 
+                description="No hay documentos subidos">
+                <el-button 
+                  type="primary" 
+                  :icon="Plus"
+                  @click="openUploadDialog">
+                  Subir primer documento
+                </el-button>
+              </el-empty>
+              
               <div v-else class="documents-list">
                 <div 
-                  v-for="doc in selectedExpediente.documents" 
+                  v-for="doc in expedienteDocuments" 
                   :key="doc.id"
                   class="document-item">
-                  <el-icon><Document /></el-icon>
-                  <span>{{ doc.name || 'Documento sin nombre' }}</span>
-                  <el-button size="small" type="primary" link>Descargar</el-button>
+                  <div class="doc-info">
+                    <el-icon><Document /></el-icon>
+                    <div class="doc-details">
+                      <div class="doc-title">{{ doc.title || doc.file_name }}</div>
+                      <div class="doc-meta">
+                        <span class="doc-type">{{ doc.document_type?.name || 'General' }}</span>
+                        <span class="doc-separator">•</span>
+                        <span class="doc-size">{{ formatFileSize(doc.file_size) }}</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="doc-actions">
+                    <el-button 
+                      size="small" 
+                      type="primary" 
+                      :icon="Download"
+                      @click="downloadDocument(doc)"
+                      plain>
+                      Descargar
+                    </el-button>
+                    <el-button 
+                      size="small" 
+                      type="danger" 
+                      :icon="Delete"
+                      @click="confirmDeleteDocument(doc)"
+                      plain>
+                      Eliminar
+                    </el-button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -438,6 +496,87 @@
         </div>
       </template>
     </el-dialog>
+
+    <!-- Modal Subir Documento -->
+    <el-dialog 
+      v-model="uploadDialogVisible" 
+      title="📎 Subir Documento PDF"
+      width="600px"
+      :close-on-click-modal="false"
+      class="upload-dialog">
+      
+      <el-form 
+        ref="documentFormRef"
+        :model="documentForm" 
+        :rules="documentRules"
+        label-width="140px"
+        label-position="left">
+        
+        <el-form-item label="Tipo de Documento" prop="document_type_id">
+          <el-select 
+            v-model="documentForm.document_type_id" 
+            placeholder="Seleccione el tipo"
+            style="width: 100%">
+            <el-option 
+              v-for="type in documentTypes"
+              :key="type.id"
+              :label="type.name"
+              :value="type.id" />
+          </el-select>
+        </el-form-item>
+
+        <el-form-item label="Título" prop="title">
+          <el-input 
+            v-model="documentForm.title" 
+            placeholder="Nombre del documento" />
+        </el-form-item>
+
+        <el-form-item label="Descripción" prop="description">
+          <el-input 
+            v-model="documentForm.description"
+            type="textarea"
+            :rows="2"
+            placeholder="Descripción opcional del documento" />
+        </el-form-item>
+
+        <el-form-item label="Archivo PDF" prop="file">
+          <el-upload
+            ref="uploadRef"
+            class="upload-demo"
+            drag
+            :before-upload="beforeUpload"
+            :on-change="handleFileChange"
+            :auto-upload="false"
+            accept=".pdf"
+            :limit="1"
+            :file-list="fileList">
+            <el-icon class="el-icon--upload"><UploadFilled /></el-icon>
+            <div class="el-upload__text">
+              Arrastra el archivo PDF aquí o <em>haz clic para seleccionar</em>
+            </div>
+            <template #tip>
+              <div class="el-upload__tip">
+                Solo archivos PDF, máximo 10MB
+              </div>
+            </template>
+          </el-upload>
+        </el-form-item>
+      </el-form>
+
+      <template #footer>
+        <div class="dialog-footer">
+          <el-button @click="uploadDialogVisible = false">Cancelar</el-button>
+          <el-button 
+            type="primary" 
+            @click="uploadDocument"
+            :loading="uploading"
+            :disabled="!documentForm.file">
+            <el-icon><Upload /></el-icon>
+            Subir Documento
+          </el-button>
+        </div>
+      </template>
+    </el-dialog>
   </div>
 </template>
 
@@ -451,7 +590,10 @@ import {
   Refresh, 
   View, 
   Edit, 
-  Delete 
+  Delete,
+  Download,
+  Upload,
+  UploadFilled
 } from '@element-plus/icons-vue'
 import axios from 'axios'
 import dayjs from 'dayjs'
@@ -459,15 +601,20 @@ import dayjs from 'dayjs'
 // Estados reactivos
 const loading = ref(false)
 const saving = ref(false)
+const uploading = ref(false)
 const dialogVisible = ref(false)
 const viewDialogVisible = ref(false)
+const uploadDialogVisible = ref(false)
 const isEditing = ref(false)
 
 // Datos
 const expedientes = ref([])
 const users = ref([])
 const profiles = ref([])
+const documentTypes = ref([])
 const selectedExpediente = ref(null)
+const expedienteDocuments = ref([])
+const fileList = ref([])
 
 // Paginación
 const currentPage = ref(1)
@@ -504,6 +651,14 @@ const expedienteForm = reactive({
   notes: ''
 })
 
+// Formulario de documentos
+const documentForm = reactive({
+  document_type_id: '',
+  title: '',
+  description: '',
+  file: null
+})
+
 // Reglas de validación
 const formRules = {
   record_number: [
@@ -518,7 +673,22 @@ const formRules = {
   ]
 }
 
+const documentRules = {
+  document_type_id: [
+    { required: true, message: 'Debe seleccionar el tipo de documento', trigger: 'change' }
+  ],
+  title: [
+    { required: true, message: 'El título es obligatorio', trigger: 'blur' },
+    { min: 3, max: 255, message: 'Debe tener entre 3 y 255 caracteres', trigger: 'blur' }
+  ],
+  file: [
+    { required: true, message: 'Debe seleccionar un archivo PDF', trigger: 'change' }
+  ]
+}
+
 const expedienteFormRef = ref()
+const documentFormRef = ref()
+const uploadRef = ref()
 
 // Funciones utilitarias
 const getUserInitials = (user) => {
@@ -540,28 +710,24 @@ const getUserFullName = (user) => {
 
 const getStatusType = (status) => {
   const types = {
-    active: 'success',
-    inactive: 'info',
-    completed: 'warning',
-    cancelled: 'danger',
     created: 'info',
     under_review: 'warning',
     approved: 'success',
-    rejected: 'danger'
+    rejected: 'danger',
+    active: 'success',
+    completed: 'primary'
   }
   return types[status] || 'info'
 }
 
 const getStatusLabel = (status) => {
   const labels = {
-    active: 'Activo',
-    inactive: 'Inactivo',
-    completed: 'Completado',
-    cancelled: 'Cancelado',
     created: 'Creado',
     under_review: 'En Revisión',
     approved: 'Aprobado',
-    rejected: 'Rechazado'
+    rejected: 'Rechazado',
+    active: 'Activo',
+    completed: 'Completado'
   }
   return labels[status] || status
 }
@@ -569,6 +735,14 @@ const getStatusLabel = (status) => {
 const formatDate = (dateString) => {
   if (!dateString) return 'N/A'
   return dayjs(dateString).format('DD/MM/YYYY HH:mm')
+}
+
+const formatFileSize = (bytes) => {
+  if (!bytes) return '0 Bytes'
+  const k = 1024
+  const sizes = ['Bytes', 'KB', 'MB', 'GB']
+  const i = Math.floor(Math.log(bytes) / Math.log(k))
+  return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i]
 }
 
 // Búsqueda con debounce
@@ -653,6 +827,29 @@ const loadProfiles = async () => {
   }
 }
 
+const loadDocumentTypes = async () => {
+  try {
+    const response = await axios.get('/api/tipos-documentos')
+    if (response.data.success) {
+      documentTypes.value = response.data.data
+    }
+  } catch (error) {
+    console.error('Error loading document types:', error)
+  }
+}
+
+const loadExpedienteDocuments = async (recordId) => {
+  try {
+    const response = await axios.get(`/api/documentos/expediente/${recordId}`)
+    if (response.data.success) {
+      expedienteDocuments.value = response.data.data
+    }
+  } catch (error) {
+    console.error('Error loading expediente documents:', error)
+    expedienteDocuments.value = []
+  }
+}
+
 // CRUD Operations
 const openCreateDialog = () => {
   isEditing.value = false
@@ -688,7 +885,16 @@ const saveExpediente = async () => {
     if (isEditing.value) {
       response = await axios.put(`/api/expedientes/${expedienteForm.id}`, expedienteForm)
     } else {
-      response = await axios.post('/api/expedientes', expedienteForm)
+      // Para crear, NO enviamos status - el backend lo asigna automáticamente como 'created'
+      const createData = {
+        record_number: expedienteForm.record_number,
+        user_id: expedienteForm.user_id,
+        profile_id: expedienteForm.profile_id,
+        observations: expedienteForm.observations || '',
+        notes: expedienteForm.notes || ''
+      }
+      console.log('Creating expediente with data:', createData)
+      response = await axios.post('/api/expedientes', createData)
     }
 
     if (response.data.success) {
@@ -711,6 +917,7 @@ const viewExpediente = async (expediente) => {
     const response = await axios.get(`/api/expedientes/${expediente.id}`)
     if (response.data.success) {
       selectedExpediente.value = response.data.data
+      await loadExpedienteDocuments(expediente.id)
       viewDialogVisible.value = true
     }
   } catch (error) {
@@ -725,6 +932,7 @@ const changeStatus = (expediente, newStatus) => {
     'under_review': 'En Revisión',
     'approved': 'Aprobado',
     'rejected': 'Rechazado',
+    'active': 'Activo',
     'completed': 'Completado'
   }
   
@@ -738,10 +946,17 @@ const changeStatus = (expediente, newStatus) => {
     }
   ).then(async () => {
     try {
-      const response = await axios.put(`/api/expedientes/${expediente.id}`, {
-        ...expediente,
-        status: newStatus
-      })
+      // Solo enviar los campos necesarios para la actualización
+      const updateData = {
+        record_number: expediente.record_number,
+        user_id: expediente.user_id,
+        profile_id: expediente.profile_id,
+        status: newStatus,
+        observations: expediente.observations || '',
+        notes: expediente.notes || ''
+      }
+      console.log('Updating expediente with data:', updateData)
+      const response = await axios.put(`/api/expedientes/${expediente.id}`, updateData)
       
       if (response.data.success) {
         ElMessage.success(`Estado cambiado a ${statusLabels[newStatus]}`)
@@ -788,6 +1003,137 @@ const deleteExpediente = async (id) => {
   }
 }
 
+// Funciones para documentos
+const openUploadDialog = () => {
+  if (!selectedExpediente.value) {
+    ElMessage.error('No hay expediente seleccionado')
+    return
+  }
+  resetDocumentForm()
+  uploadDialogVisible.value = true
+}
+
+const beforeUpload = (file) => {
+  const isPDF = file.type === 'application/pdf'
+  const isLt10M = file.size / 1024 / 1024 < 10
+
+  if (!isPDF) {
+    ElMessage.error('El archivo debe ser un PDF')
+    return false
+  }
+  if (!isLt10M) {
+    ElMessage.error('El archivo no puede ser mayor a 10MB')
+    return false
+  }
+  
+  return false // Evitar auto-upload
+}
+
+const handleFileChange = (file) => {
+  documentForm.file = file.raw
+  fileList.value = [file]
+}
+
+const uploadDocument = async () => {
+  if (!documentFormRef.value) return
+  
+  const valid = await documentFormRef.value.validate().catch(() => false)
+  if (!valid || !documentForm.file) return
+
+  uploading.value = true
+  try {
+    const formData = new FormData()
+    formData.append('record_id', selectedExpediente.value.id)
+    formData.append('document_type_id', documentForm.document_type_id)
+    formData.append('title', documentForm.title)
+    formData.append('description', documentForm.description || '')
+    formData.append('file', documentForm.file)
+
+    const response = await axios.post('/api/documentos', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    })
+
+    if (response.data.success) {
+      ElMessage.success('Documento subido correctamente')
+      uploadDialogVisible.value = false
+      await loadExpedienteDocuments(selectedExpediente.value.id)
+    }
+  } catch (error) {
+    console.error('Error uploading document:', error)
+    ElMessage.error('Error al subir documento')
+  } finally {
+    uploading.value = false
+  }
+}
+
+const downloadDocument = async (document) => {
+  try {
+    const response = await axios.get(`/api/documentos/${document.id}/descargar`, {
+      responseType: 'blob'
+    })
+    
+    // Crear URL del blob y descargar
+    const blob = new Blob([response.data], { type: 'application/pdf' })
+    const url = window.URL.createObjectURL(blob)
+    const link = document.createElement('a')
+    link.href = url
+    link.download = document.file_name || `documento_${document.id}.pdf`
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+    window.URL.revokeObjectURL(url)
+    
+    ElMessage.success('Documento descargado')
+  } catch (error) {
+    console.error('Error downloading document:', error)
+    ElMessage.error('Error al descargar documento')
+  }
+}
+
+const confirmDeleteDocument = (document) => {
+  ElMessageBox.confirm(
+    `¿Está seguro de eliminar el documento "${document.title || document.file_name}"? Esta acción no se puede deshacer.`,
+    '⚠️ Confirmar Eliminación',
+    {
+      confirmButtonText: 'Sí, Eliminar',
+      cancelButtonText: 'Cancelar',
+      type: 'warning'
+    }
+  ).then(() => {
+    deleteDocument(document.id)
+  }).catch(() => {
+    // Usuario canceló
+  })
+}
+
+const deleteDocument = async (documentId) => {
+  try {
+    const response = await axios.delete(`/api/documentos/${documentId}`)
+    if (response.data.success) {
+      ElMessage.success('Documento eliminado correctamente')
+      await loadExpedienteDocuments(selectedExpediente.value.id)
+    }
+  } catch (error) {
+    console.error('Error deleting document:', error)
+    ElMessage.error('Error al eliminar documento')
+  }
+}
+
+const resetDocumentForm = () => {
+  Object.assign(documentForm, {
+    document_type_id: '',
+    title: '',
+    description: '',
+    file: null
+  })
+  fileList.value = []
+  if (uploadRef.value) {
+    uploadRef.value.clearFiles()
+  }
+}
+
 const resetForm = () => {
   Object.assign(expedienteForm, {
     record_number: '',
@@ -813,6 +1159,7 @@ onMounted(() => {
   loadExpedientes()
   loadUsers()
   loadProfiles()
+  loadDocumentTypes()
 })
 </script>
 
@@ -1112,6 +1459,207 @@ onMounted(() => {
   font-size: 14px;
 }
 
+/* Estilos para documentos */
+.documents-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  gap: 12px;
+}
+
+.documents-header h4 {
+  margin: 0 !important;
+  flex: 1;
+}
+
+.upload-btn {
+  background: linear-gradient(135deg, #10b981, #059669) !important;
+  border: none !important;
+  color: white !important;
+  font-weight: 600 !important;
+  border-radius: 8px !important;
+  padding: 8px 16px !important;
+  font-size: 12px !important;
+  transition: all 0.2s ease !important;
+  box-shadow: 0 2px 4px rgba(16, 185, 129, 0.3) !important;
+  flex-shrink: 0;
+}
+
+.upload-btn:hover {
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 8px rgba(16, 185, 129, 0.4) !important;
+}
+
+.document-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 16px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background: #fafbfc;
+  transition: all 0.2s ease;
+  margin-bottom: 8px;
+}
+
+.document-item:hover {
+  background: #f0f9ff;
+  border-color: #3b82f6;
+  transform: translateX(4px);
+}
+
+.doc-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  min-width: 0;
+}
+
+.doc-details {
+  flex: 1;
+  min-width: 0;
+}
+
+.doc-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.doc-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.doc-type {
+  font-weight: 500;
+}
+
+.doc-separator {
+  color: #d1d5db;
+}
+
+.doc-size {
+  color: #9ca3af;
+}
+
+.doc-actions {
+  display: flex;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.doc-actions .el-button {
+  padding: 4px 8px !important;
+  font-size: 11px !important;
+  border-radius: 6px !important;
+  font-weight: 600 !important;
+  transition: all 0.2s ease !important;
+}
+
+.doc-actions .el-button:hover {
+  transform: translateY(-1px) scale(1.05) !important;
+}
+
+/* Estilos para modal de subida */
+.upload-dialog :deep(.el-dialog) {
+  border-radius: 16px;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+  background: white;
+}
+
+.upload-dialog :deep(.el-dialog__header) {
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+  border-radius: 16px 16px 0 0;
+  padding: 20px 24px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.upload-dialog :deep(.el-dialog__title) {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.upload-dialog :deep(.el-dialog__body) {
+  padding: 24px;
+  background: white;
+}
+
+.upload-dialog :deep(.el-upload-dragger) {
+  border: 2px dashed #d1d5db;
+  border-radius: 12px;
+  background: #fafbfc;
+  transition: all 0.3s ease;
+  padding: 40px 20px;
+}
+
+.upload-dialog :deep(.el-upload-dragger:hover) {
+  border-color: #3b82f6;
+  background: #f0f9ff;
+}
+
+.upload-dialog :deep(.el-upload-dragger.is-dragover) {
+  border-color: #10b981;
+  background: #ecfdf5;
+}
+
+.upload-dialog :deep(.el-icon--upload) {
+  font-size: 48px;
+  color: #6b7280;
+  margin-bottom: 16px;
+}
+
+.upload-dialog :deep(.el-upload__text) {
+  color: #374151;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.upload-dialog :deep(.el-upload__text em) {
+  color: #3b82f6;
+  font-style: normal;
+  font-weight: 600;
+}
+
+.upload-dialog :deep(.el-upload__tip) {
+  color: #6b7280;
+  font-size: 12px;
+  margin-top: 8px;
+}
+
+.upload-dialog :deep(.el-form-item__label) {
+  font-weight: 600;
+  color: #374151;
+}
+
+.upload-dialog :deep(.el-input__inner),
+.upload-dialog :deep(.el-textarea__inner) {
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  transition: all 0.2s ease;
+}
+
+.upload-dialog :deep(.el-input__inner:focus),
+.upload-dialog :deep(.el-textarea__inner:focus) {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.upload-dialog :deep(.el-select .el-input__inner) {
+  border-radius: 8px;
+}
+
 /* Mejorar tags de estado */
 .table-section :deep(.el-tag) {
   font-weight: 600;
@@ -1292,35 +1840,112 @@ onMounted(() => {
 }
 
 /* Mejorar botones de acción */
+/* Contenedor principal de acciones - grid perfecto */
 .action-buttons {
+  display: grid;
+  grid-template-rows: auto auto;
+  gap: 8px;
+  place-items: center;
+  padding: 12px 8px;
+  min-height: 85px;
+  width: 100%;
+  justify-content: center;
+  align-content: center;
+}
+
+/* Fila superior: botones básicos (ver, editar, eliminar) */
+.action-buttons .basic-actions {
   display: flex;
-  gap: 4px;
+  gap: 3px;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+}
+
+/* Fila inferior: botones de cambio de estado */
+.action-buttons .status-actions {
+  display: flex;
+  gap: 2px;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  flex-wrap: wrap;
+  width: fit-content;
+  min-height: 28px;
 }
 
-.action-buttons .el-button {
-  transition: all 0.2s ease !important;
-}
-
-/* Botones circulares para ver/editar/eliminar */
-.action-buttons .el-button[circle] {
-  width: 32px !important;
-  height: 32px !important;
+/* Estilos para botones básicos - perfectamente uniformes */
+.basic-actions .el-button {
+  width: 30px !important;
+  height: 30px !important;
   padding: 0 !important;
-  border-radius: 50% !important;
+  border-radius: 6px !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
+  font-size: 14px !important;
+  transition: all 0.2s ease !important;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.08) !important;
+  border: 1px solid rgba(0,0,0,0.08) !important;
+  flex-shrink: 0 !important;
+  margin: 0 !important;
 }
 
-/* Botones rectangulares para cambio de estado */
-.action-buttons .el-button:not([circle]) {
-  padding: 6px 12px !important;
-  font-size: 12px !important;
-  border-radius: 6px !important;
-  font-weight: 500 !important;
+.basic-actions .el-button:hover {
+  transform: translateY(-1px) scale(1.05) !important;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.12) !important;
+}
+
+/* Estilos para botones de estado - perfectamente centrados */
+.status-actions .el-button {
+  padding: 5px 8px !important;
+  font-size: 9px !important;
+  border-radius: 12px !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.2px !important;
+  transition: all 0.2s ease !important;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
+  min-width: 58px !important;
+  max-width: 58px !important;
+  height: 24px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border: none !important;
+  flex-shrink: 0 !important;
+  margin: 0 !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+}
+
+.status-actions .el-button:hover {
+  transform: translateY(-1px) scale(1.03) !important;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.15) !important;
+}
+
+/* Colores específicos para botones de estado */
+.status-actions .el-button--info {
+  background: linear-gradient(135deg, #409eff, #337ecc) !important;
+  border: none !important;
+  color: white !important;
+}
+
+.status-actions .el-button--success {
+  background: linear-gradient(135deg, #67c23a, #529b2e) !important;
+  border: none !important;
+  color: white !important;
+}
+
+.status-actions .el-button--danger {
+  background: linear-gradient(135deg, #f56c6c, #dd4a4a) !important;
+  border: none !important;
+  color: white !important;
+}
+
+.status-actions .el-button--warning {
+  background: linear-gradient(135deg, #e6a23c, #d48806) !important;
+  border: none !important;
+  color: white !important;
 }
 
 /* Nota del estado en formulario */
@@ -1329,6 +1954,29 @@ onMounted(() => {
   color: #666;
   margin-top: 4px;
   font-style: italic;
+}
+
+/* Texto para estados finalizados - exactamente igual a botones */
+.status-final {
+  font-size: 9px;
+  color: #909399;
+  font-weight: 700;
+  padding: 5px 8px;
+  background: linear-gradient(135deg, #f4f4f5, #e9e9eb);
+  border-radius: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.2px;
+  min-width: 58px;
+  max-width: 58px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  border: 1px solid #e4e7ed;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .action-buttons .el-button:hover {

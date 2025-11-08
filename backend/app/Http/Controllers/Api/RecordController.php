@@ -42,7 +42,7 @@ class RecordController extends Controller
                 'user_id' => 'required|exists:users,id',
                 'profile_id' => 'required|exists:profiles,id',
                 'record_number' => 'required|string|max:50|unique:records',
-                'status' => 'in:active,inactive,completed,cancelled',
+                'status' => 'in:created,under_review,approved,rejected,active,completed',
                 'notes' => 'nullable|string'
             ]);
 
@@ -119,7 +119,7 @@ class RecordController extends Controller
                 'user_id' => 'sometimes|exists:users,id',
                 'profile_id' => 'sometimes|exists:profiles,id',
                 'record_number' => 'sometimes|string|max:50|unique:records,record_number,' . $id,
-                'status' => 'sometimes|in:active,inactive,completed,cancelled',
+                'status' => 'sometimes|in:created,under_review,approved,rejected,active,completed',
                 'notes' => 'nullable|string'
             ]);
 

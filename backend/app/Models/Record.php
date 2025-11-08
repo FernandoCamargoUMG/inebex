@@ -22,6 +22,10 @@ class Record extends Model
         'profile_id' => 'integer',
     ];
 
+    protected $attributes = [
+        'status' => 'created',
+    ];
+
     /**
      * Get the user that owns the record.
      */
