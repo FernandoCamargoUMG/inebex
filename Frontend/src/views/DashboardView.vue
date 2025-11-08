@@ -1,6 +1,32 @@
 <template>
   <section class="dashboard-content">
-    <h1 class="dashboard-title">Bienvenido a INEBEX</h1>
+    <!-- Bienvenida mejorada -->
+    <div class="welcome-section">
+      <div class="welcome-header">
+        <div class="welcome-left">
+          <h1 class="dashboard-title">Bienvenido</h1>
+          <p class="welcome-subtitle">Sistema Integral de Expedientes y Citas</p>
+        </div>
+        <div class="welcome-stats">
+          <div class="stat-item">
+            <div class="stat-number">{{ citasHoyCount }}</div>
+            <div class="stat-label">Citas de hoy</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">{{ expedientesRevisionCount }}</div>
+            <div class="stat-label">En revisión</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">{{ expedientesAprobadosCount }}</div>
+            <div class="stat-label">Aprobados</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">{{ expedientesRechazadosCount }}</div>
+            <div class="stat-label">Rechazados</div>
+          </div>
+        </div>
+      </div>
+    </div>
     
     <!-- Panel de notificaciones -->
     <div v-if="notificacionesHoy.length > 0" class="notifications-panel">
@@ -17,29 +43,6 @@
           <el-button size="small" type="text" @click="dismissNotification(notif.id)">×</el-button>
         </div>
       </div>
-    </div>
-
-    <div class="dashboard-cards">
-      <el-card class="dashboard-card citas-hoy" shadow="hover">
-        <div class="card-title">Citas de hoy</div>
-        <div class="card-value">{{ citasHoyCount }}</div>
-      </el-card>
-      <el-card class="dashboard-card revision" shadow="hover">
-        <div class="card-title">En revisión</div>
-        <div class="card-value">{{ expedientesRevisionCount }}</div>
-      </el-card>
-      <el-card class="dashboard-card aprobados" shadow="hover">
-        <div class="card-title">Aprobados</div>
-        <div class="card-value">{{ expedientesAprobadosCount }}</div>
-      </el-card>
-      <el-card class="dashboard-card rechazados" shadow="hover">
-        <div class="card-title">Rechazados</div>
-        <div class="card-value">{{ expedientesRechazadosCount }}</div>
-      </el-card>
-      <el-card class="dashboard-card notificaciones" shadow="hover">
-        <div class="card-title">Notificaciones</div>
-        <div class="card-value">{{ notificacionesHoyCount }}</div>
-      </el-card>
     </div>
     <div class="dashboard-calendar">
       <div class="calendar-header">
@@ -887,56 +890,85 @@ function updateNotificacionesHoy() {
 <style scoped>
 .dashboard-content {
   flex: 1;
-  padding: 48px 40px;
+  padding: 32px 40px;
 }
-.dashboard-title {
-  font-size: 2.1rem;
-  color: #3d5c2c;
-  font-weight: 700;
-  margin-bottom: 32px;
-  letter-spacing: 1px;
-  text-align: center;
-}
-.dashboard-cards {
-  display: flex;
-  gap: 2rem;
-  flex-wrap: wrap;
-  justify-content: center;
+
+/* Sección de bienvenida mejorada */
+.welcome-section {
   margin-bottom: 32px;
 }
-.dashboard-card {
-  background: #fff;
-  border-radius: 16px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-  text-align: center;
-  border: none;
-  min-width: 180px;
-  min-height: 120px;
+
+.welcome-header {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  transition: box-shadow 0.2s;
+  background: linear-gradient(135deg, #f8fffe 0%, #e8f5e8 100%);
+  border-radius: 20px;
+  padding: 32px 40px;
+  box-shadow: 0 4px 20px rgba(61, 92, 44, 0.08);
+  border: 1px solid rgba(61, 92, 44, 0.1);
 }
-.dashboard-card.citas-hoy { border-top: 4px solid #6b7a4b; }
-.dashboard-card.revision { border-top: 4px solid #b6a800; }
-.dashboard-card.aprobados { border-top: 4px solid #3d5c2c; }
-.dashboard-card.rechazados { border-top: 4px solid #b64b4b; }
-.dashboard-card.notificaciones { border-top: 4px solid #4b7ab6; }
-.dashboard-card:hover {
-  box-shadow: 0 4px 16px rgba(107, 122, 75, 0.12);
+
+.welcome-left {
+  flex: 1;
 }
-.card-title {
-  color: #6b7a4b;
-  font-size: 1.1rem;
-  font-weight: 600;
-  margin-bottom: 8px;
-  letter-spacing: 0.5px;
-}
-.card-value {
+
+.dashboard-title {
+  font-size: 2.8rem;
   color: #3d5c2c;
-  font-size: 2.2rem;
-  font-weight: bold;
+  font-weight: 800;
+  margin: 0 0 8px 0;
+  letter-spacing: -0.5px;
+  background: linear-gradient(135deg, #3d5c2c 0%, #6b7a4b 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.welcome-subtitle {
+  font-size: 1.2rem;
+  color: #6b7a4b;
+  font-weight: 500;
+  margin: 0;
+  opacity: 0.9;
+}
+
+.welcome-stats {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+
+.stat-item {
+  text-align: center;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 12px;
+  min-width: 80px;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(61, 92, 44, 0.1);
+}
+
+.stat-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(61, 92, 44, 0.15);
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.stat-number {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #3d5c2c;
+  margin-bottom: 4px;
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 0.85rem;
+  color: #6b7a4b;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 .dashboard-calendar {
   margin: 0 auto;
@@ -1132,7 +1164,64 @@ function updateNotificacionesHoy() {
 }
 
 /* Responsive */
+@media (max-width: 1200px) {
+  .welcome-stats {
+    gap: 16px;
+  }
+  
+  .stat-item {
+    min-width: 70px;
+    padding: 12px;
+  }
+  
+  .stat-number {
+    font-size: 1.8rem;
+  }
+  
+  .stat-label {
+    font-size: 0.8rem;
+  }
+}
+
 @media (max-width: 900px) {
+  .dashboard-content {
+    padding: 24px 20px;
+  }
+  
+  .welcome-header {
+    flex-direction: column;
+    gap: 24px;
+    text-align: center;
+    padding: 24px;
+  }
+  
+  .dashboard-title {
+    font-size: 2.2rem;
+  }
+  
+  .welcome-subtitle {
+    font-size: 1.1rem;
+  }
+  
+  .welcome-stats {
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .stat-item {
+    min-width: 65px;
+    padding: 10px;
+  }
+  
+  .stat-number {
+    font-size: 1.6rem;
+  }
+  
+  .stat-label {
+    font-size: 0.75rem;
+  }
+  
   .events-table table, .events-table thead, .events-table tbody, .events-table th, .events-table td, .events-table tr {
     display: block;
   }
@@ -1160,6 +1249,37 @@ function updateNotificacionesHoy() {
   
   .cell-actions::before { 
     content: 'Acciones' 
+  }
+}
+
+@media (max-width: 600px) {
+  .dashboard-title {
+    font-size: 1.8rem;
+  }
+  
+  .welcome-subtitle {
+    font-size: 1rem;
+  }
+  
+  .welcome-header {
+    padding: 20px;
+  }
+  
+  .welcome-stats {
+    gap: 8px;
+  }
+  
+  .stat-item {
+    min-width: 60px;
+    padding: 8px;
+  }
+  
+  .stat-number {
+    font-size: 1.4rem;
+  }
+  
+  .stat-label {
+    font-size: 0.7rem;
   }
 }
 

@@ -18,6 +18,11 @@ class ProfileController extends Controller
         try {
             $profiles = Profile::all();
             
+            // Agregar tipos de documentos a cada perfil
+            foreach ($profiles as $profile) {
+                $profile->document_types = $profile->documentTypes();
+            }
+            
             return response()->json([
                 'success' => true,
                 'data' => $profiles,
@@ -83,6 +88,9 @@ class ProfileController extends Controller
                     'message' => 'Perfil no encontrado'
                 ], Response::HTTP_NOT_FOUND);
             }
+
+            // Agregar tipos de documentos
+            $profile->document_types = $profile->documentTypes();
 
             return response()->json([
                 'success' => true,

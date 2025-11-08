@@ -843,6 +843,7 @@ const loadExpedienteDocuments = async (recordId) => {
     const response = await axios.get(`/api/documentos/expediente/${recordId}`)
     if (response.data.success) {
       expedienteDocuments.value = response.data.data
+      console.log('Documentos cargados:', expedienteDocuments.value)
     }
   } catch (error) {
     console.error('Error loading expediente documents:', error)
@@ -1068,9 +1069,9 @@ const uploadDocument = async () => {
   }
 }
 
-const downloadDocument = async (document) => {
+const downloadDocument = async (doc) => {
   try {
-    const response = await axios.get(`/api/documentos/${document.id}/descargar`, {
+    const response = await axios.get(`/api/documentos/${doc.id}/descargar`, {
       responseType: 'blob'
     })
     
@@ -1079,7 +1080,7 @@ const downloadDocument = async (document) => {
     const url = window.URL.createObjectURL(blob)
     const link = document.createElement('a')
     link.href = url
-    link.download = document.file_name || `documento_${document.id}.pdf`
+    link.download = doc.file_name || `documento_${doc.id}.pdf`
     document.body.appendChild(link)
     link.click()
     document.body.removeChild(link)
@@ -1092,9 +1093,9 @@ const downloadDocument = async (document) => {
   }
 }
 
-const confirmDeleteDocument = (document) => {
+const confirmDeleteDocument = (doc) => {
   ElMessageBox.confirm(
-    `¿Está seguro de eliminar el documento "${document.title || document.file_name}"? Esta acción no se puede deshacer.`,
+    `¿Está seguro de eliminar el documento "${doc.title || doc.file_name}"? Esta acción no se puede deshacer.`,
     '⚠️ Confirmar Eliminación',
     {
       confirmButtonText: 'Sí, Eliminar',
@@ -1102,7 +1103,7 @@ const confirmDeleteDocument = (document) => {
       type: 'warning'
     }
   ).then(() => {
-    deleteDocument(document.id)
+    deleteDocument(doc.id)
   }).catch(() => {
     // Usuario canceló
   })

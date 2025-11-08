@@ -22,9 +22,12 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'name' => 'required|string|max:50',
+            'first_name' => 'required|string|max:50',
+            'last_name' => 'required|string|max:50',
             'email' => 'required|email|unique:users',
             'password' => 'required|string|min:6',
+            'phone' => 'nullable|string|max:20',
+            'address' => 'nullable|string|max:255',
             'role_id' => 'required|exists:roles,id',
             'status' => 'in:active,inactive'
         ]);
@@ -40,15 +43,20 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         
         $validated = $request->validate([
-            'name' => 'string|max:50',
+            'first_name' => 'string|max:50',
+            'last_name' => 'string|max:50',
             'email' => 'email|unique:users,email,' . $id,
-            'password' => 'string|min:6',
+            'password' => 'nullable|string|min:6',
+            'phone' => 'nullable|string|max:20',
+            'address' => 'nullable|string|max:255',
             'role_id' => 'exists:roles,id',
             'status' => 'in:active,inactive'
         ]);
 
-        if (isset($validated['password'])) {
+        if (isset($validated['password']) && !empty($validated['password'])) {
             $validated['password'] = md5($validated['password']);
+        } else {
+            unset($validated['password']);
         }
 
         $user->update($validated);
