@@ -22,6 +22,9 @@ Route::get('test', function () {
     ]);
 });
 
+// Endpoint simple de login (dev/demo - usa md5 como el resto del proyecto)
+Route::post('login', [UserController::class, 'login']);
+
 // ============= USUARIOS =============
 Route::prefix('usuarios')->group(function () {
     Route::get('/', [UserController::class, 'index']);

@@ -1,0 +1,205 @@
+/* Estilos básicos para FullCalendar */
+.fc {
+  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.fc-view-harness {
+  flex-grow: 1;
+  max-height: 100%;
+}
+
+.fc-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.fc-toolbar-title {
+  font-size: 1.75em;
+  font-weight: 600;
+  color: #2f4b2a;
+  margin: 0;
+}
+
+.fc-button-group > .fc-button {
+  position: relative;
+  display: inline-block;
+  padding: 0.375em 0.75em;
+  margin-bottom: 0;
+  font-size: 1em;
+  font-weight: 400;
+  line-height: 1.5;
+  text-align: center;
+  text-decoration: none;
+  vertical-align: middle;
+  cursor: pointer;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  color: #333;
+}
+
+.fc-button:hover {
+  background-color: #f5f5f5;
+  border-color: #ccc;
+}
+
+.fc-button-primary {
+  background-color: #4caf50;
+  border-color: #4caf50;
+  color: #fff;
+}
+
+.fc-button-primary:hover {
+  background-color: #45a049;
+  border-color: #45a049;
+}
+
+.fc-button:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.fc-daygrid {
+  position: relative;
+}
+
+.fc-scrollgrid {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.fc-scrollgrid-section > td {
+  border-left: 1px solid #ddd;
+}
+
+.fc-col-header-cell {
+  background-color: #f8f9fa;
+  padding: 0.75em;
+  text-align: center;
+  font-weight: 600;
+  border-bottom: 2px solid #dee2e6;
+}
+
+.fc-daygrid-day {
+  background-color: #fff;
+  border-right: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  min-height: 120px;
+}
+
+.fc-daygrid-day:hover {
+  background-color: #f8f9fa;
+}
+
+.fc-daygrid-day-number {
+  padding: 0.5em;
+  font-weight: 600;
+  color: #495057;
+}
+
+.fc-daygrid-day.fc-day-today {
+  background-color: #fff3cd;
+}
+
+.fc-daygrid-day.fc-day-today .fc-daygrid-day-number {
+  color: #856404;
+  font-weight: 700;
+}
+
+.fc-daygrid-event {
+  background-color: #4caf50;
+  border: 1px solid #4caf50;
+  color: #fff;
+  padding: 2px 4px;
+  margin: 1px;
+  border-radius: 4px;
+  font-size: 0.85em;
+  font-weight: 500;
+  cursor: pointer;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.fc-daygrid-event:hover {
+  background-color: #45a049;
+  border-color: #45a049;
+}
+
+.fc-event-dragging .fc-daygrid-event {
+  opacity: 0.75;
+  z-index: 1000;
+}
+
+.fc-daygrid-event .fc-event-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.fc-event-resizer {
+  display: none;
+}
+
+.fc-daygrid-day-events {
+  margin-top: 0;
+  padding: 0 2px;
+}
+
+.fc-daygrid-more-link {
+  color: #6c757d;
+  font-size: 0.75em;
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 2px 4px;
+}
+
+.fc-daygrid-more-link:hover {
+  color: #495057;
+  text-decoration: none;
+}
+
+/* Estados de citas por color */
+.fc-event.status-pending {
+  background-color: #f0ad4e;
+  border-color: #f0ad4e;
+}
+
+.fc-event.status-confirmed {
+  background-color: #4caf50;
+  border-color: #4caf50;
+}
+
+.fc-event.status-completed {
+  background-color: #2e7d32;
+  border-color: #2e7d32;
+}
+
+.fc-event.status-canceled {
+  background-color: #e04b4b;
+  border-color: #e04b4b;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .fc-toolbar {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .fc-toolbar-title {
+    font-size: 1.25em;
+  }
+  
+  .fc-daygrid-day {
+    min-height: 80px;
+  }
+  
+  .fc-daygrid-event {
+    font-size: 0.75em;
+  }
+}

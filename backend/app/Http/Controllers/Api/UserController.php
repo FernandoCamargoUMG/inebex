@@ -61,4 +61,32 @@ class UserController extends Controller
         $user->delete();
         return response()->json(['message' => 'User deleted successfully']);
     }
+
+    /**
+     * Simple login endpoint for frontend (development/demo only).
+     * Expects: { email, password }
+     * Compares md5(password) with stored password and returns user on success.
+     */
+    public function login(Request $request)
+    {
+        $validated = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required|string'
+        ]);
+
+        $user = User::where('email', $validated['email'])->first();
+        if (! $user) {
+            return response()->json(['message' => 'Usuario no encontrado'], 404);
+        }
+
+        if ($user->password !== md5($validated['password'])) {
+            return response()->json(['message' => 'Credenciales incorrectas'], 401);
+        }
+
+        // Return user without password field
+        $userArray = $user->toArray();
+        unset($userArray['password']);
+
+        return response()->json($userArray);
+    }
 }
